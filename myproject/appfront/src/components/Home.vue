@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <el-row display="margin-top:10px">
-        <el-input v-model="input" placeholder="请输入书名" style="display:inline-table; width: 30%; float:left"></el-input>
+        <el-input v-model="input1" placeholder="请输入书名" style="display:inline-table; width: 30%; float:left"></el-input>
+        <el-input v-model="input2" placeholder="请输入作者" style="display:inline-table; width: 30%; float:left"></el-input>
         <el-button type="primary" @click="addBook()" style="float:left; margin: 2px;">新增</el-button>
     </el-row>
     <el-row>
@@ -11,6 +12,9 @@
           </el-table-column>
           <el-table-column prop="book_name" label="书名" min-width="100">
             <template scope="scope"> {{ scope.row.fields.book_name }} </template>
+          </el-table-column>
+          <el-table-column prop="author_name" label="作者" min-width="100">
+            <template scope="scope"> {{ scope.row.fields.author_name }} </template>
           </el-table-column>
           <el-table-column prop="add_time" label="添加时间" min-width="100">
             <template scope="scope"> {{ scope.row.fields.add_time }} </template>
@@ -25,7 +29,8 @@ export default {
   name: 'home',
   data () {
     return {
-      input: '',
+      input1: '',
+      input2: '',
       bookList: [],
     }
   },
@@ -34,10 +39,12 @@ export default {
   },
   methods: {
     addBook(){
-      this.$http.get('http://127.0.0.1:8000/api/add_book?book_name=' + this.input)
+      this.$http.get('http://gitlab.darrenflexxu.com:9003/api/add_book?book_name=' + this.input1 + ';author_name=' + this.input2)
         .then((response) => {
             var res = JSON.parse(response.bodyText)
             if (res.error_num == 0) {
+              this.input1 = ''
+              this.input2 = ''
               this.showBooks()
             } else {
               this.$message.error('新增书籍失败，请重试')
@@ -46,7 +53,7 @@ export default {
         })
     },
     showBooks(){
-      this.$http.get('http://127.0.0.1:8000/api/show_books')
+      this.$http.get('http://gitlab.darrenflexxu.com:9003/api/show_books')
         .then((response) => {
             var res = JSON.parse(response.bodyText)
             console.log(res)

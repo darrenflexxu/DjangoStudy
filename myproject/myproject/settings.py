@@ -25,7 +25,7 @@ SECRET_KEY = 'qixa)p9w$hf^g8q=9dgc3wul1ix57^nwclw55s=#0p5)o0-g*r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gitlab.darrenflexxu.com']
 
 
 # Application definition
@@ -82,8 +82,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'myproject',
         'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'xdf169315',
+        'HOST': 'vps.darrenflexxu.com',
     }
 }
 

@@ -12,7 +12,7 @@ from models import Book
 def add_book(request):
     response = {}
     try:
-        book = Book(book_name=request.GET.get('book_name'))
+        book = Book(book_name=request.GET.get('book_name'), author_name=request.GET.get('author_name'))
         book.save()
         response['msg'] = 'success'
         response['error_num'] = 0
